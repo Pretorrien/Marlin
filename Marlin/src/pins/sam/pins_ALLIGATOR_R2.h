@@ -23,7 +23,7 @@
 
 /**
  * Alligator Board R2
- * https://reprap.org/wiki/Alligator_Board
+ * http://www.3dartists.org/
  */
 
 #ifndef __SAM3X8E__

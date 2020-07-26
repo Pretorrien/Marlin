@@ -35,7 +35,7 @@ Configuration
 
 Getting Help
 
-  - https://reprap.org/forum/list.php?415
+  - http://forums.reprap.org/list.php?415
     The Marlin Discussion Forum is a great place to get help from other Marlin
     users who may have experienced similar issues to your own.
 
