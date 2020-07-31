@@ -735,7 +735,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 540 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 974.2 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -961,8 +961,8 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-//#define NOZZLE_TO_PROBE_OFFSET { 20, 10, -0.9 } //V6 simple pinda holder https://www.thingiverse.com/thing:4166991
-#define NOZZLE_TO_PROBE_OFFSET { 23, 5, 0 }  //Volcano new style duct with pinda
+#define NOZZLE_TO_PROBE_OFFSET { 23, 5, -0.9 } // MK3s extruder
+
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1103,12 +1103,12 @@
 #define Y_BED_SIZE 298
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -8
-#define Y_MIN_POS -9
+#define X_MIN_POS 0
+#define Y_MIN_POS -2
 #define Z_MIN_POS 0
 #define X_MAX_POS 319
 #define Y_MAX_POS 306
-#define Z_MAX_POS 400
+#define Z_MAX_POS 385
 
 /**
  * Software Endstops
@@ -1372,7 +1372,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (55*60)
-#define HOMING_FEEDRATE_Z  (4*60)
+#define HOMING_FEEDRATE_Z  (10*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1505,7 +1505,7 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MIN_POS), 20 }
+  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS), 10 }
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
   #define NOZZLE_PARK_Z_FEEDRATE 5      // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
