@@ -1079,7 +1079,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#define BLTOUCH
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1172,7 +1172,8 @@
  *     O-- FRONT --+
  */
 //#define NOZZLE_TO_PROBE_OFFSET { 20, 10, -0.9 } //V6 simple pinda holder https://www.thingiverse.com/thing:4166991
-#define NOZZLE_TO_PROBE_OFFSET { -18, 12, -0.7 }  //Volcano new style duct with pinda
+//#define NOZZLE_TO_PROBE_OFFSET { -18, 12, -0.7 }  //Volcano new style duct with pinda
+#define NOZZLE_TO_PROBE_OFFSET { -26, 55, 0 }  //Dragon-Orbiter-Bltouch
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
