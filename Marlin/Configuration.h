@@ -534,7 +534,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
+#define HEATER_0_MAXTEMP 300
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -542,7 +542,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      150
+#define BED_MAXTEMP      120
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -575,11 +575,16 @@
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
+ 
+  // Dragon+50W
+  #define DEFAULT_Kp 22.32
+  #define DEFAULT_Ki 2.22
+  #define DEFAULT_Kd 56.08
 
   // Volcano values
-  #define DEFAULT_Kp 23.47
-  #define DEFAULT_Ki 2.49
-  #define DEFAULT_Kd 55.32
+  //#define DEFAULT_Kp 23.47
+  //#define DEFAULT_Ki 2.49
+  //#define DEFAULT_Kd 55.32
 
   //V6 values
   //#define DEFAULT_Kp 18.70
@@ -644,9 +649,16 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 49.12
-  #define DEFAULT_bedKi 8.85
-  #define DEFAULT_bedKd 181.75
+  //750W heater
+  #define DEFAULT_bedKp 51.84
+  #define DEFAULT_bedKi 9.18
+  #define DEFAULT_bedKd 195.13
+ 
+ 
+  //Original Sk-go heater
+  //#define DEFAULT_bedKp 49.12
+  //#define DEFAULT_bedKi 8.85
+  //#define DEFAULT_bedKd 181.75
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -919,7 +931,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.3, 100.4, 400, 414.9 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100.3, 100.4, 400, 696.43 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1006,7 +1018,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION
+//#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1062,7 +1074,7 @@
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-#define FIX_MOUNTED_PROBE
+//#define FIX_MOUNTED_PROBE
 
 /**
  * Use the nozzle as the probe, as with a conductive
@@ -1173,17 +1185,17 @@
  */
 //#define NOZZLE_TO_PROBE_OFFSET { 20, 10, -0.9 } //V6 simple pinda holder https://www.thingiverse.com/thing:4166991
 //#define NOZZLE_TO_PROBE_OFFSET { -18, 12, -0.7 }  //Volcano new style duct with pinda
-#define NOZZLE_TO_PROBE_OFFSET { -26, 55, 0 }  //Dragon-Orbiter-Bltouch
+#define NOZZLE_TO_PROBE_OFFSET { -26, 55, -1.55 }  //Dragon-Orbiter-Bltouch
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
+//#define PROBING_MARGIN 30
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE 10000
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (HOMING_FEEDRATE_Z /2)
+#define Z_PROBE_FEEDRATE_FAST 1000
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1224,7 +1236,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#define MULTIPLE_PROBING 2
+//#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
@@ -1241,8 +1253,8 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   1 // Z Clearance for Deploy/Stow
-#define Z_CLEARANCE_BETWEEN_PROBES  1 // Z Clearance between probe points
+#define Z_CLEARANCE_DEPLOY_PROBE   15 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     1 // Z Clearance between multiple probes
 #define Z_AFTER_PROBING           3 // Z position after probing is done
 
@@ -1363,12 +1375,12 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 310
-#define Y_BED_SIZE 310
+#define X_BED_SIZE 297
+#define Y_BED_SIZE 303
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -8
-#define Y_MIN_POS -9
+#define X_MIN_POS 0
+#define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
@@ -1597,8 +1609,8 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 5
-  #define GRID_MAX_POINTS_Y 5
+  #define GRID_MAX_POINTS_X 6
+  #define GRID_MAX_POINTS_Y 6
 
   // Probe along the Y axis, advancing X after each column
   //#define PROBE_Y_FIRST
@@ -1649,7 +1661,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 10          // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 2         // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 5    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -1734,12 +1746,12 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-  #define Z_SAFE_HOMING_X_POINT 20  // X point for Z homing
-  #define Z_SAFE_HOMING_Y_POINT 14  // Y point for Z homing
+  #define Z_SAFE_HOMING_X_POINT 50  // X point for Z homing
+  #define Z_SAFE_HOMING_Y_POINT 56  // Y point for Z homing
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (55*60), (55*60), (20*60) }
+#define HOMING_FEEDRATE_MM_M { (55*60), (55*60), (5*60) } //(20)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
